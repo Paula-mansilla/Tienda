@@ -1,59 +1,33 @@
 package views;
 
-import panel.PanelProducto;
-
 import javax.swing.*;
 import java.awt.*;
+import javax.swing.border.LineBorder;
+
+// Importa tus paneles
+import panel.panelBuscador;
+import panel.panelProducto;
 
 public class VistaTienda extends JFrame {
-    private JTextField campoBuscar;
-    private JPanel panelProductos;
 
     public VistaTienda() {
-        setTitle("Tienda Fercher");
+        setTitle("Tienda en Java");
+        setSize(1500, 800); 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(800, 500);
+        setLocationRelativeTo(null); 
         setLayout(new BorderLayout());
-        
 
-        // Panel izquierdo de búsqueda
-      
-        JPanel panelBusqueda = new JPanel();
-        panelBusqueda.setPreferredSize(new Dimension(140, getHeight()));
-       JLabel etiquetaBuscar = new JLabel("Buscar");
-        
-   
-      
-        campoBuscar = new JTextField(10);
-      
+        JPanel miVentana = new JPanel(new BorderLayout());
+        miVentana.setBorder(new LineBorder(Color.BLACK, 2));
 
-        panelBusqueda.add(etiquetaBuscar);
-        panelBusqueda.add(campoBuscar);
+        panelBuscador buscador = new panelBuscador();
+        miVentana.add(buscador, BorderLayout.WEST);
 
-        // Panel derecho de productos
-        JPanel panelDerecho = new JPanel(new BorderLayout());
-        panelBusqueda.setBorder(BorderFactory.createLineBorder(Color.GRAY, 3));// ayuda de chat gpt
-    
+        panelProducto productos = new panelProducto();
+        miVentana.add(productos, BorderLayout.CENTER);
 
-        JLabel etiquetaProductos = new JLabel("Producto");
-        etiquetaProductos.setForeground(Color.BLACK);
-
-
-        panelProductos = new JPanel(new GridLayout(2, 4, 10, 10));
-      
-
-        // Agregar 8 productos como prueba
-        for (int i = 0; i < 8; i++) {
-            panelProductos.add(new PanelProducto());
-        }
-
-        panelDerecho.add(etiquetaProductos, BorderLayout.NORTH);
-        panelDerecho.add(panelProductos, BorderLayout.CENTER);
-
-        add(panelBusqueda, BorderLayout.WEST);
-        add(panelDerecho, BorderLayout.CENTER);
-
-        setVisible(true);
+        this.add(miVentana);
+        this.setVisible(true);
     }
 
     public static void main(String[] args) {
